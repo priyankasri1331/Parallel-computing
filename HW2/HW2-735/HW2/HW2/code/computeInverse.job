@@ -1,0 +1,12 @@
+#BSUB -n 20 -R 'select[nxt] rusage[mem=150] span[ptile=20]' -M 150
+#BSUB -J compute_pi_mpi -o all_outputs.%J -L /bin/bash -W 0:10
+
+
+module load intel/2017A #load Intel Software Stack
+
+
+echo"Starting Inverse"
+echo"1st parameter matrix size,second number of threads"
+export OMP_NESTED=true
+export OMP_NUM_THREADS=20
+./serMatInv.exe 1024 20
